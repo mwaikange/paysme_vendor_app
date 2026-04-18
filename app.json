@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "PaySME Vendor",
+    "slug": "paysme-vendor-app",
+    "version": "1.0.0",
+    "icon": "./assets/luancher_masked.png",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "orientation": "portrait",
+    "splash": {
+      "image": "./assets/paysme-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "icon": "./assets/luancher_masked.png"
+    },
+    "android": {
+      "package": "com.mwaikange.paysmevendorapp",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/luancher_masked.png",
+        "backgroundColor": "#000000"
+      }
+    }
+  }
+}
