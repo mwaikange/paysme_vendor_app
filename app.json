@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PaySME Vendor",
-    "slug": "paysme-vendor-app",
+    "slug": "paysme-vendor",
     "version": "1.0.0",
     "icon": "./assets/luancher_masked.png",
     "platforms": [
@@ -31,6 +31,12 @@
         "foregroundImage": "./assets/luancher_masked.png",
         "backgroundColor": "#000000"
       }
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f448154e-9619-4b86-868f-622ec2c53052"
+      }
+    },
+    "owner": "mwaikange"
   }
 }
