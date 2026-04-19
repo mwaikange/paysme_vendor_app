@@ -877,12 +877,6 @@ export default function App() {
               <Text style={styles.primaryButtonText}>Login</Text>
             </TouchableOpacity>
 
-            <View style={styles.demoBox}>
-              <Text style={styles.demoLabel}>Demo credentials</Text>
-              <Text style={styles.demoText}>Prepaid: `VND-2024-001` / `password123`</Text>
-              <Text style={styles.demoText}>Loan: `LND-2024-002` / `loan123`</Text>
-              <Text style={styles.demoHint}>Use PIN `12345` for prepaid or `54321` for loan vendor testing.</Text>
-            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

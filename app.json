@@ -3,7 +3,7 @@
     "name": "PaySME Vendor",
     "slug": "paysme-vendor",
     "version": "1.0.0",
-    "icon": "./assets/luancher_masked.png",
+    "icon": "./assets/app_icon.png",
     "platforms": [
       "ios",
       "android",
@@ -23,12 +23,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "icon": "./assets/luancher_masked.png"
+      "icon": "./assets/app_icon.png"
     },
     "android": {
       "package": "com.mwaikange.paysmevendorapp",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/luancher_masked.png",
+        "foregroundImage": "./assets/app_icon.png",
         "backgroundColor": "#000000"
       }
     },
