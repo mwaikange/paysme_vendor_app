@@ -11,7 +11,7 @@
     ],
     "orientation": "portrait",
     "splash": {
-      "image": "./assets/app_icon2.png",
+      "image": "./assets/paysme-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -27,11 +27,11 @@
     },
     "android": {
       "package": "com.mwaikange.paysmevendorapp",
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon2.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "versionCode": 1
+      }
     },
     "extra": {
       "eas": {
