@@ -28,7 +28,7 @@
     "android": {
       "package": "com.mwaikange.paysmevendorapp",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/app_icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       }
     },
