@@ -1173,6 +1173,7 @@ const styles = StyleSheet.create({
     color: '#E5E7EB',
     fontSize: 15,
     lineHeight: 22,
+    textAlign: 'center',
     marginBottom: 24,
   },
   loginCard: {
