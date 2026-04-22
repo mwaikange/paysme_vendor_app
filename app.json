@@ -2,7 +2,7 @@
   "expo": {
     "name": "PaySME Vendor",
     "slug": "paysme-vendor",
-    "version": "1.0.3",
+    "version": "2.0.03",
     "icon": "./assets/app_icon.png",
     "platforms": [
       "ios",
