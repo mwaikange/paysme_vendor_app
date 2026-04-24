@@ -606,109 +606,110 @@ export default function App() {
   };
 
   // ─── RENDER CREDITS ────────────────────────────────────────────────────────
-  const renderCredits = () => (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <View>
-        {isCredit && (
-          <SectionCard>
-            <Text style={styles.sectionTitle}>Token Advance statement</Text>
-            <View style={styles.loanStatPanel}>
-              <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Current advance balance</Text><Text style={[styles.loanStatValue, { color: '#B91C1C', fontSize: 20 }]}>{fmt(vendor.advanceBalance)}</Text></View>
-              <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Last paid</Text><Text style={styles.loanStatValue}>{vendor.advanceLastPaid ?? 'No payments yet'}</Text></View>
-              <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Total paid</Text><Text style={styles.loanStatValue}>{fmt(vendor.advanceTotalPaid)}</Text></View>
-              <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Total payments</Text><Text style={styles.loanStatValue}>{vendor.advancePaymentCount}</Text></View>
-              <View style={[styles.loanStatRow, styles.loanStatDivRow]}>
-                <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Min. monthly installment</Text>
-                <Text style={[styles.loanStatValue, { color: BRAND_BLUE, fontWeight: '900' }]}>{fmt(LOAN_MIN_INSTALLMENT)}</Text>
-              </View>
-              <View style={styles.loanStatRow}>
-                <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Advance status</Text>
-                <View style={[styles.statusBadge, vendor.advanceBalance === 0 ? styles.historyCompleted : styles.statusPendingBadge]}>
-                  <Text style={[styles.statusBadgeText, vendor.advanceBalance === 0 ? styles.historyCompletedText : { color: '#9A6400' }]}>{vendor.advanceBalance === 0 ? 'Paid Up' : 'Active'}</Text>
-                </View>
-              </View>
-              <View style={styles.loanStatRow}>
-                <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Advance interest</Text>
-                <Text style={[styles.loanStatValue, { color: BRAND_BLUE }]}>{Math.round((vendor.advanceInterest || ADVANCE_INTEREST) * 100)}%</Text>
-              </View>
-              <View style={styles.loanStatRow}>
-                <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Term</Text>
-                <Text style={styles.loanStatValue}>{vendor.advanceTerm > 0 ? `${vendor.advanceTerm} months` : '—'}</Text>
+const renderCredits = () => (
+  <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    <View>
+      {isCredit && (
+        <SectionCard>
+          <Text style={styles.sectionTitle}>Token Advance statement</Text>
+          <View style={styles.loanStatPanel}>
+            <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Current advance balance</Text><Text style={[styles.loanStatValue, { color: '#B91C1C', fontSize: 20 }]}>{fmt(vendor.advanceBalance)}</Text></View>
+            <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Last paid</Text><Text style={styles.loanStatValue}>{vendor.advanceLastPaid ?? 'No payments yet'}</Text></View>
+            <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Total paid</Text><Text style={styles.loanStatValue}>{fmt(vendor.advanceTotalPaid)}</Text></View>
+            <View style={styles.loanStatRow}><Text style={styles.loanStatLabel}>Total payments</Text><Text style={styles.loanStatValue}>{vendor.advancePaymentCount}</Text></View>
+            <View style={[styles.loanStatRow, styles.loanStatDivRow]}>
+              <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Min. monthly installment</Text>
+              <Text style={[styles.loanStatValue, { color: BRAND_BLUE, fontWeight: '900' }]}>{fmt(LOAN_MIN_INSTALLMENT)}</Text>
+            </View>
+            <View style={styles.loanStatRow}>
+              <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Advance status</Text>
+              <View style={[styles.statusBadge, vendor.advanceBalance === 0 ? styles.historyCompleted : styles.statusPendingBadge]}>
+                <Text style={[styles.statusBadgeText, vendor.advanceBalance === 0 ? styles.historyCompletedText : { color: '#9A6400' }]}>{vendor.advanceBalance === 0 ? 'Paid Up' : 'Active'}</Text>
               </View>
             </View>
-            <View style={styles.divider} />
-            <Text style={styles.sectionSubTitle}>Pay installment</Text>
-            <Text style={styles.sectionCopy}>Minimum {fmt(LOAN_MIN_INSTALLMENT)} per installment.</Text>
-            <TextInput value={installmentAmt} onChangeText={setInstallmentAmt} placeholder={`Min. ${fmt(LOAN_MIN_INSTALLMENT)}`}
-              style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
-            {installmentAmt ? (
-              <View style={styles.softPanel}>
-                <DetailRow label="Installment amount"    value={fmt(Number(installmentAmt) || 0)} />
-                <DetailRow label="Advance balance after" value={fmt(Math.max(0, vendor.advanceBalance - (Number(installmentAmt) || 0)))} />
-              </View>
-            ) : null}
-            <TouchableOpacity style={[styles.primaryButton, installLoading && styles.disabledButton]} onPress={handleInstallment} disabled={installLoading}>
-              <LoadingContent loading={installLoading} label="Pay installment" loadingLabel="Processing…" />
-            </TouchableOpacity>
-          </SectionCard>
-        )}
-
-        <SectionCard>
-          <Text style={styles.sectionTitle}>Earnings snapshot</Text>
-          <View style={styles.earningsHero}>
-            <Text style={styles.earningsLabel}>Total fees earned</Text>
-            <Text style={styles.earningsValue}>{fmt(vendor.feeEarned)}</Text>
-            <Text style={styles.earningsHint}>Commission rate: {Math.round(feeRate * 100)}%</Text>
+            <View style={styles.loanStatRow}>
+              <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Advance interest</Text>
+              <Text style={[styles.loanStatValue, { color: BRAND_BLUE }]}>{Math.round((vendor.advanceInterest || ADVANCE_INTEREST) * 100)}%</Text>
+            </View>
+            <View style={styles.loanStatRow}>
+              <Text style={[styles.loanStatLabel, { fontWeight: '800', color: TEXT_PRIMARY }]}>Term</Text>
+              <Text style={styles.loanStatValue}>{vendor.advanceTerm > 0 ? `${vendor.advanceTerm} months` : '—'}</Text>
+            </View>
           </View>
-          <Text style={styles.sectionSubTitle}>Withdraw fees</Text>
-          {isCredit && <Text style={styles.sectionCopy}>50% paid to you · 50% applied to your Token Advance balance.</Text>}
-          <TextInput value={withdrawAmt} onChangeText={setWithdrawAmt} placeholder="Withdrawal amount"
+          <View style={styles.divider} />
+          <Text style={styles.sectionSubTitle}>Pay installment</Text>
+          <Text style={styles.sectionCopy}>Minimum {fmt(LOAN_MIN_INSTALLMENT)} per installment.</Text>
+          <TextInput value={installmentAmt} onChangeText={setInstallmentAmt} placeholder={`Min. ${fmt(LOAN_MIN_INSTALLMENT)}`}
             style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
-          {withdrawAmt ? (
+          {installmentAmt ? (
             <View style={styles.softPanel}>
-              {isCredit ? (
-                <><DetailRow label="Cash payout (50%)"        value={fmt((Number(withdrawAmt) || 0) * 0.5)} /><DetailRow label="Advance repayment (50%)" value={fmt((Number(withdrawAmt) || 0) * 0.5)} /></>
-              ) : (
-                <DetailRow label="You receive (100%)" value={fmt(Number(withdrawAmt) || 0)} />
-              )}
+              <DetailRow label="Installment amount"    value={fmt(Number(installmentAmt) || 0)} />
+              <DetailRow label="Advance balance after" value={fmt(Math.max(0, vendor.advanceBalance - (Number(installmentAmt) || 0)))} />
             </View>
           ) : null}
-          <TouchableOpacity style={[styles.secondaryButton, withdrawLoading && styles.disabledButton]} onPress={handleWithdraw} disabled={withdrawLoading}>
-            <LoadingContent loading={withdrawLoading} label="Withdraw fees" loadingLabel="Processing…" dark={false} />
-          </TouchableOpacity>
-
-          {isCredit && (
-            <>
-              <View style={styles.divider} />
-              <Text style={styles.sectionSubTitle}>Pay with fees</Text>
-              <Text style={styles.sectionCopy}>Full amount deducted from fee balance and applied to Token Advance.</Text>
-              <TextInput value={feePayAmt} onChangeText={setFeePayAmt} placeholder="Amount to pay"
-                style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
-              <TouchableOpacity style={[styles.darkButton, feePayLoading && styles.disabledButton]} onPress={handleFeePay} disabled={feePayLoading}>
-                <LoadingContent loading={feePayLoading} label="Pay with fees" loadingLabel="Processing…" />
-              </TouchableOpacity>
-            </>
-          )}
-        </SectionCard>
-
-        <SectionCard>
-          <Text style={styles.sectionTitle}>TopUp credits</Text>
-          <Text style={styles.sectionCopy}>{vendor.type === 'prepaid' ? 'Prepaid vendors get a 5% discount — buy N$5000, pay N$4750.' : 'Add credit tokens to process more PaySME invoices.'}</Text>
-          <TextInput value={topupAmt} onChangeText={setTopupAmt} placeholder="Enter TopUp amount"
-            style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
-          {topupAmt ? (
-            <View style={styles.softPanel}>
-              <DetailRow label="Credits added" value={fmt(Number(topupAmt) || 0)} />
-              {vendor.type === 'prepaid' && (<><DetailRow label="Discount (5%)" value={fmt((Number(topupAmt) || 0) * 0.05)} /><DetailRow label="You pay" value={fmt((Number(topupAmt) || 0) * 0.95)} /></>)}
-            </View>
-          ) : null}
-          <TouchableOpacity style={[styles.primaryButton, topupLoading && styles.disabledButton]} onPress={handleTopup} disabled={topupLoading}>
-            <LoadingContent loading={topupLoading} label="TopUp credits" loadingLabel="Processing…" />
+          <TouchableOpacity style={[styles.primaryButton, installLoading && styles.disabledButton]} onPress={handleInstallment} disabled={installLoading}>
+            <LoadingContent loading={installLoading} label="Pay installment" loadingLabel="Processing…" />
           </TouchableOpacity>
         </SectionCard>
-      </View>
-    </TouchableWithoutFeedback>
-  );
+      )}
+
+      <SectionCard>
+        <Text style={styles.sectionTitle}>Earnings snapshot</Text>
+        <View style={styles.earningsHero}>
+          <Text style={styles.earningsLabel}>Total fees earned</Text>
+          <Text style={styles.earningsValue}>{fmt(vendor.feeEarned)}</Text>
+          <Text style={styles.earningsHint}>Commission rate: {Math.round(feeRate * 100)}%</Text>
+        </View>
+        <Text style={styles.sectionSubTitle}>Withdraw commission</Text>   {/* Changed label */}
+        {isCredit && <Text style={styles.sectionCopy}>50% paid to you · 50% applied to your Token Advance balance.</Text>}
+        <TextInput value={withdrawAmt} onChangeText={setWithdrawAmt} placeholder="Withdrawal amount"
+          style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
+        {withdrawAmt ? (
+          <View style={styles.softPanel}>
+            {isCredit ? (
+              <><DetailRow label="Cash payout (50%)"        value={fmt((Number(withdrawAmt) || 0) * 0.5)} /><DetailRow label="Advance repayment (50%)" value={fmt((Number(withdrawAmt) || 0) * 0.5)} /></>
+            ) : (
+              <DetailRow label="You receive (100%)" value={fmt(Number(withdrawAmt) || 0)} />
+            )}
+          </View>
+        ) : null}
+        {/* WITHDRAW BUTTON - NOW BLUE PRIMARY */}
+        <TouchableOpacity style={[styles.primaryButton, withdrawLoading && styles.disabledButton]} onPress={handleWithdraw} disabled={withdrawLoading}>
+          <LoadingContent loading={withdrawLoading} label="Withdraw commission" loadingLabel="Processing…" />
+        </TouchableOpacity>
+
+        {isCredit && (
+          <>
+            <View style={styles.divider} />
+            <Text style={styles.sectionSubTitle}>Pay with fees</Text>
+            <Text style={styles.sectionCopy}>Full amount deducted from fee balance and applied to Token Advance.</Text>
+            <TextInput value={feePayAmt} onChangeText={setFeePayAmt} placeholder="Amount to pay"
+              style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
+            <TouchableOpacity style={[styles.darkButton, feePayLoading && styles.disabledButton]} onPress={handleFeePay} disabled={feePayLoading}>
+              <LoadingContent loading={feePayLoading} label="Pay with fees" loadingLabel="Processing…" />
+            </TouchableOpacity>
+          </>
+        )}
+      </SectionCard>
+
+      <SectionCard>
+        <Text style={styles.sectionTitle}>TopUp credits</Text>
+        <Text style={styles.sectionCopy}>{vendor.type === 'prepaid' ? 'Prepaid vendors get a 5% discount — buy N$5000, pay N$4750.' : 'Add credit tokens to process more PaySME invoices.'}</Text>
+        <TextInput value={topupAmt} onChangeText={setTopupAmt} placeholder="Enter TopUp amount"
+          style={styles.input} keyboardType="numeric" onFocus={onFocusInput} />
+        {topupAmt ? (
+          <View style={styles.softPanel}>
+            <DetailRow label="Credits added" value={fmt(Number(topupAmt) || 0)} />
+            {vendor.type === 'prepaid' && (<><DetailRow label="Discount (5%)" value={fmt((Number(topupAmt) || 0) * 0.05)} /><DetailRow label="You pay" value={fmt((Number(topupAmt) || 0) * 0.95)} /></>)}
+          </View>
+        ) : null}
+        <TouchableOpacity style={[styles.primaryButton, topupLoading && styles.disabledButton]} onPress={handleTopup} disabled={topupLoading}>
+          <LoadingContent loading={topupLoading} label="TopUp credits" loadingLabel="Processing…" />
+        </TouchableOpacity>
+      </SectionCard>
+    </View>
+  </TouchableWithoutFeedback>
+);
 
   // ─── RENDER PROFILE ────────────────────────────────────────────────────────
   const renderProfile = () => (
