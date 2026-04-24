@@ -778,50 +778,54 @@ export default function App() {
   );
 
   // ─── LOGIN ─────────────────────────────────────────────────────────────────
-  if (authState === 'login') {
-    return (
-      <SafeAreaView style={styles.loginSafeArea}>
-        <StatusBar style="light" />
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <ScrollView contentContainerStyle={styles.loginScroll} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={{ flex: 1 }}>
-                <View style={styles.loginGlow1} />
-                <View style={styles.loginGlow2} />
-                <Image source={require('./assets/paysme-logo.png')} style={styles.brandLogo} resizeMode="contain" />
-                <Text style={styles.brandSubtitle}>Vendor portal for processing payments, managing credits, and tracking fees.</Text>
-                <View style={styles.loginCard}>
-                  <View style={styles.loginCardAccent} />
-                  <Text style={styles.loginTitle}>Vendor sign in</Text>
-                  <Text style={styles.loginCopy}>Use your PaySME Vendor ID and password to continue.</Text>
-                  <View style={styles.loginFieldWrap}>
-                    <View style={styles.loginFieldIcon}><Ionicons name="person-outline" size={18} color={BRAND_BLUE} /></View>
-                    <TextInput value={loginData.vendorId} onChangeText={(v) => setLoginData((p) => ({ ...p, vendorId: v }))}
-                      placeholder="Vendor ID" placeholderTextColor="#9CA3AF" style={styles.loginInput}
-                      autoCapitalize="characters" returnKeyType="next" />
-                  </View>
-                  <View style={styles.loginFieldWrap}>
-                    <View style={styles.loginFieldIcon}><Ionicons name="lock-closed-outline" size={18} color={BRAND_BLUE} /></View>
-                    <TextInput value={loginData.password} onChangeText={(v) => setLoginData((p) => ({ ...p, password: v }))}
-                      placeholder="Password" placeholderTextColor="#9CA3AF" secureTextEntry={!showLoginPw}
-                      style={[styles.loginInput, { flex: 1 }]} returnKeyType="done" onSubmitEditing={handleLogin} />
-                    <TouchableOpacity onPress={() => setShowLoginPw((p) => !p)} style={{ paddingHorizontal: 12 }}>
-                      <Ionicons name={showLoginPw ? 'eye-off-outline' : 'eye-outline'} size={20} color={TEXT_SECONDARY} />
-                    </TouchableOpacity>
-                  </View>
-                  <TouchableOpacity style={[styles.loginBtn, loginLoading && styles.disabledButton]} onPress={handleLogin} disabled={loginLoading}>
-                    <LoadingContent loading={loginLoading} label="Login" loadingLabel="Signing in…" />
+if (authState === 'login') {
+  return (
+    <SafeAreaView style={styles.loginSafeArea}>
+      <StatusBar style="light" />
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView contentContainerStyle={styles.loginScroll} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+          {/* Single child inside TouchableWithoutFeedback */}
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{ flex: 1 }}>
+              <View style={styles.loginGlow1} />
+              <View style={styles.loginGlow2} />
+              <Image source={require('./assets/paysme-logo.png')} style={styles.brandLogo} resizeMode="contain" />
+              <Text style={styles.brandSubtitle}>Vendor portal for processing payments, managing credits, and tracking fees.</Text>
+              <View style={styles.loginCard}>
+                <View style={styles.loginCardAccent} />
+                <Text style={styles.loginTitle}>Vendor sign in</Text>
+                <Text style={styles.loginCopy}>Use your PaySME Vendor ID and password to continue.</Text>
+                <View style={styles.loginFieldWrap}>
+                  <View style={styles.loginFieldIcon}><Ionicons name="person-outline" size={18} color={BRAND_BLUE} /></View>
+                  <TextInput value={loginData.vendorId} onChangeText={(v) => setLoginData((p) => ({ ...p, vendorId: v }))}
+                    placeholder="Vendor ID" placeholderTextColor="#9CA3AF" style={styles.loginInput}
+                    autoCapitalize="characters" returnKeyType="next" />
+                </View>
+                <View style={styles.loginFieldWrap}>
+                  <View style={styles.loginFieldIcon}><Ionicons name="lock-closed-outline" size={18} color={BRAND_BLUE} /></View>
+                  <TextInput value={loginData.password} onChangeText={(v) => setLoginData((p) => ({ ...p, password: v }))}
+                    placeholder="Password" placeholderTextColor="#9CA3AF" secureTextEntry={!showLoginPw}
+                    style={[styles.loginInput, { flex: 1 }]} returnKeyType="done" onSubmitEditing={handleLogin} />
+                  <TouchableOpacity onPress={() => setShowLoginPw((p) => !p)} style={{ paddingHorizontal: 12 }}>
+                    <Ionicons name={showLoginPw ? 'eye-off-outline' : 'eye-outline'} size={20} color={TEXT_SECONDARY} />
                   </TouchableOpacity>
                 </View>
-                <Text style={styles.footerText}>© Mwai-PaySME Solutions cc  |  2030</Text>
-                <Text style={styles.footerVersion}>V.2.03</Text>
+                <TouchableOpacity style={[styles.loginBtn, loginLoading && styles.disabledButton]} onPress={handleLogin} disabled={loginLoading}>
+                  <LoadingContent loading={loginLoading} label="Login" loadingLabel="Signing in…" />
+                </TouchableOpacity>
               </View>
-            </TouchableWithoutFeedback>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    );
-  }
+            </View>
+          </TouchableWithoutFeedback>
+
+          {/* Footer – outside TouchableWithoutFeedback, still inside ScrollView */}
+          <Text style={styles.footerText}>© Mwai-PaySME Solutions cc  |  2030</Text>
+          <Text style={styles.footerVersion}>V.2.03</Text>
+
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
 
   // ─── MAIN APP ──────────────────────────────────────────────────────────────
   return (
